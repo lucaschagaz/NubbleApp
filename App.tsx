@@ -1,11 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Text} from './src/Componentes/Text';
+import {Text} from './src/components/Text';
 
 function App(): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text>Seja bem vindo</Text>
+      <Text presets="headingLarge" style={{fontFamily: 'Satoshi-Black'}}>
+        Seja bem vindo
+      </Text>
     </View>
   );
 }
