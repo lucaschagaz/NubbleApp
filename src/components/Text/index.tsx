@@ -21,25 +21,29 @@ export const Text = ({
   semiBold,
   ...rest
 }: TextProps) => {
-
-  const fontFamily = getFontFamily(italic, semiBold, bold, preset)
+  const fontFamily = getFontFamily(italic, semiBold, bold, preset);
 
   return (
-    <RNText style={[$fontSizes[preset],{fontFamily}, style]} {...rest}>
+    <RNText style={[$fontSizes[preset], {fontFamily}, style]} {...rest}>
       {children}
     </RNText>
   );
 };
 
-const getFontFamily = ( italic?: boolean, semiBold?: boolean,bold?: boolean, preset:fontVariant) => {
+const getFontFamily = (
+  italic?: boolean,
+  semiBold?: boolean,
+  bold?: boolean,
+  preset: fontVariant,
+) => {
   if (
     preset === 'headingLarge' ||
     preset === 'headingMedium' ||
-    preset === 'headingSmall' ||
+    preset === 'headingSmall'
   ) {
     return italic ? $fontFamily.boldItalic : $fontFamily.bold;
   }
-  
+
   switch (true) {
     case italic && bold:
       return $fontFamily.boldItalic;
