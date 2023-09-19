@@ -1,11 +1,13 @@
-import {
-  Text as RNText,
-  TextProps as RNTextProps,
-  TextStyle,
-} from 'react-native';
+import {TextStyle} from 'react-native';
 import React from 'react';
+import {createText} from '@shopify/restyle';
+import {Theme} from '../../theme/theme';
 
-interface TextProps extends RNTextProps {
+const SRText = createText<Theme>();
+
+type SRTextProps = React.ComponentProps<typeof SRText>;
+
+interface TextProps extends SRTextProps {
   preset?: fontVariant;
   italic?: boolean;
   bold?: boolean;
@@ -21,20 +23,20 @@ export const Text = ({
   semiBold,
   ...rest
 }: TextProps) => {
-  const fontFamily = getFontFamily(italic, semiBold, bold, preset);
+  const fontFamily = getFontFamily(preset, italic, semiBold, bold);
 
   return (
-    <RNText style={[$fontSizes[preset], {fontFamily}, style]} {...rest}>
+    <SRText style={[$fontSizes[preset], {fontFamily}, style]} {...rest}>
       {children}
-    </RNText>
+    </SRText>
   );
 };
 
 const getFontFamily = (
+  preset: fontVariant,
   italic?: boolean,
   semiBold?: boolean,
   bold?: boolean,
-  preset: fontVariant,
 ) => {
   if (
     preset === 'headingLarge' ||
@@ -43,7 +45,6 @@ const getFontFamily = (
   ) {
     return italic ? $fontFamily.boldItalic : $fontFamily.bold;
   }
-
   switch (true) {
     case italic && bold:
       return $fontFamily.boldItalic;
