@@ -16,7 +16,7 @@ interface TextProps extends SRTextProps {
 
 export const Text = ({
   children,
-  preset = 'headingMedium',
+  preset = 'paragraphMedium',
   style,
   italic,
   bold,
@@ -26,7 +26,10 @@ export const Text = ({
   const fontFamily = getFontFamily(preset, italic, semiBold, bold);
 
   return (
-    <SRText style={[$fontSizes[preset], {fontFamily}, style]} {...rest}>
+    <SRText
+      color="backgroundContrast"
+      style={[$fontSizes[preset], {fontFamily}, style]}
+      {...rest}>
       {children}
     </SRText>
   );
@@ -45,25 +48,20 @@ const getFontFamily = (
   ) {
     return italic ? $fontFamily.boldItalic : $fontFamily.bold;
   }
+
   switch (true) {
     case italic && bold:
       return $fontFamily.boldItalic;
-      break;
     case italic:
       return $fontFamily.italic;
-      break;
     case bold:
       return $fontFamily.bold;
-      break;
     case semiBold && italic:
       return $fontFamily.mediumItalic;
-      break;
     case semiBold:
       return $fontFamily.medium;
-      break;
     default:
       return $fontFamily.regular;
-      break;
   }
 };
 
@@ -77,7 +75,7 @@ type fontVariant =
   | 'paragraphCaption'
   | 'paragraphCaptionSmall';
 
-const $fontSizes: Record<fontVariant, TextStyle> = {
+export const $fontSizes: Record<fontVariant, TextStyle> = {
   headingLarge: {fontSize: 32, lineHeight: 38.4},
   headingMedium: {fontSize: 22, lineHeight: 26.4},
   headingSmall: {fontSize: 18, lineHeight: 23.4},
@@ -90,7 +88,7 @@ const $fontSizes: Record<fontVariant, TextStyle> = {
   paragraphCaptionSmall: {fontSize: 10, lineHeight: 14},
 };
 
-const $fontFamily = {
+export const $fontFamily = {
   black: 'Satoshi-Black',
   blackItalic: 'Satoshi-BlackItalic',
   bold: 'Satoshi-Bold',
