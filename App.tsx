@@ -1,36 +1,50 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Text} from './src/components/Text';
-import {Button} from './src/components/Button';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
-import {Icon} from './src/components/Icon';
+import {Button} from './src/components/Button';
+// import {Icon} from './src/components/Icon';
+import {Box} from './src/components/Box';
+import {TextInput} from './src/components/TextInput';
 
 function App(): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
-      <View style={styles.container}>
-        <Text preset="headingLarge">Seja bem vindo</Text>
-        <Button variant="outline" mt="s20" mb="s20" title="Entrar" />
-        <Button isLoading />
-        {/*
-        <Button mb="s20" title="Entrar" />
-        <EyeOff size={50} color="red" />
-        <EyeOn size={50} color="red" />
-        <Button disabled variant="outline" mt="s20" mb="s20" title="Entrar" />
-        <Button disabled variant="primary" mb="s20" title="Entrar" /> */}
-        <Icon name="eyeOff" size={30} color="error" />
-        <Icon name="homeFill" size={50} color="primary" />
-      </View>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <Text preset="headingLarge" mb="s10">
+            Olá!
+          </Text>
+          <Text mb="s40" preset="paragraphLarge">
+            Digite seu e-mail e senha para entrar
+          </Text>
+          <Box mb="s16">
+            <TextInput
+              errorMessage="Mensagem de erro"
+              label="E-mail"
+              placeholder="Digite seu e-mail"
+            />
+          </Box>
+          <Box mb="s8">
+            <TextInput label="Senha" placeholder="Digite sua senha" />
+          </Box>
+          <Text mb="s48" preset="paragraphSmall" bold color="primary">
+            Esqueci minha senha
+          </Text>
+          <Button mb="s12" title="Entrar" />
+          <Button title="Criar uma conta" variant="outline" />
+        </View>
+      </SafeAreaView>
     </ThemeProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flex: 1,
-    paddingHorizontal: 10,
+    // width: '100%',
+    // flex: 1,
+    paddingHorizontal: 24,
   },
 });
 
