@@ -12,11 +12,15 @@ import {useAppTheme} from '../../hook/useAppTheme';
 interface ITextInputProps extends TextInputProps {
   label: string;
   errorMessage?: string;
+  rightComponent?: React.ReactElement;
+  boxProps?: BoxProps;
 }
 
 export const TextInput = ({
   label,
   errorMessage,
+  rightComponent,
+  boxProps,
   ...RNTextInoutProps
 }: ITextInputProps) => {
   const {colors} = useAppTheme();
@@ -29,14 +33,16 @@ export const TextInput = ({
 
   const $BoxStyle: BoxProps = {
     padding: 's16',
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: errorMessage ? 2 : 1,
     borderColor: errorMessage ? 'error' : 'gray4',
     borderRadius: 's12',
   };
 
   return (
-    <Pressable onPress={handleFocus}>
-      <Box>
+    <Box {...boxProps}>
+      <Pressable onPress={handleFocus}>
         <Text mb="s4" preset="paragraphMedium">
           {label}
         </Text>
@@ -47,19 +53,21 @@ export const TextInput = ({
             ref={inputRef}
             {...RNTextInoutProps}
           />
+          {rightComponent && <Box ml="s16">{rightComponent}</Box>}
         </Box>
         {errorMessage && (
           <Text preset="paragraphSmall" bold color="error" mt="s4">
             {errorMessage}
           </Text>
         )}
-      </Box>
-    </Pressable>
+      </Pressable>
+    </Box>
   );
 };
 
 const $TextInputStyle: TextStyle = {
   padding: 0,
+  flex: 1,
   fontFamily: $fontFamily.regular,
   ...$fontSizes.paragraphMedium,
 };
