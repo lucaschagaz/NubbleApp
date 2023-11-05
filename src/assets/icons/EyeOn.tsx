@@ -1,12 +1,10 @@
 import React from 'react';
 import {Svg, Path} from 'react-native-svg';
-import {Theme} from '../../theme/theme';
-import {useTheme} from '@shopify/restyle';
 import {IconBaseProps} from '../../components/Icon';
+import {useAppTheme} from '../../hook/useAppTheme';
 
 export const EyeOn = ({size = 20, color = 'grayBlack'}: IconBaseProps) => {
-  const {colors} = useTheme<Theme>();
-
+  const {colors} = useAppTheme();
   return (
     <Svg width={size} height={size} viewBox="0 0 20 20" fill="none">
       <Path

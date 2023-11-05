@@ -28,27 +28,36 @@ import {FlashOnIcon} from '../../assets/icons/FlashOnIcon';
 import {MessageIcon} from '../../assets/icons/MessageIcon';
 import {NewPostIcon} from '../../assets/icons/NewPostIcon';
 import {SearchIcon} from '../../assets/icons/SearchIcon';
+import {Pressable} from 'react-native';
+import {ErroRoundIcon} from '../../assets/icons/ErroRound';
+import {MessageRoundIcon} from '../../assets/icons/MessageRound';
+import {CheckRoundIcon} from '../../assets/icons/CheckRound';
 
 export interface IconBaseProps {
   size?: number;
   color?: ThemeColors;
 }
 
-interface IIconProps {
-  name: Iconsname;
+export interface IIconProps {
+  name: IconsName;
   size?: number;
   color?: ThemeColors;
+  onPress?: () => void;
 }
 
-export const Icon = ({name, color, size}: IIconProps) => {
+export const Icon = ({name, size, onPress}: IIconProps) => {
   const SVGIcon = iconsRegistry[name];
-  return <SVGIcon size={size} color={color} />;
+
+  return onPress ? (
+    <Pressable hitSlop={10} onPress={onPress}>
+      <SVGIcon size={size} />
+    </Pressable>
+  ) : (
+    <SVGIcon size={size} />
+  );
 };
 
 const iconsRegistry = {
-  eyeOn: EyeOn,
-  eyeOff: EyeOff,
-  homeFill: HomeFill,
   arrowLeft: ArrowLeftIcon,
   arrowRight: ArrowRightIcon,
   bell: BellIcon,
@@ -59,14 +68,20 @@ const iconsRegistry = {
   chat: ChatIcon,
   chatOn: ChatOnIcon,
   check: CheckIcon,
-  comment: CommentIcon,
+  checkRound: CheckRoundIcon,
   chevronRight: ChevronRightIcon,
+  comment: CommentIcon,
+  erroMessage: ErroRoundIcon,
+  eyeOn: EyeOn,
+  eyeOff: EyeOff,
   flashOn: FlashOnIcon,
   flashOff: FlashOffIcon,
   heart: HeartIcon,
   heartFill: HeartFillIcon,
   home: HomeIcon,
+  homeFill: HomeFill,
   message: MessageIcon,
+  messageRound: MessageRoundIcon,
   newPost: NewPostIcon,
   profile: ProfileIcon,
   profileFill: ProfileFillIcon,
@@ -77,4 +92,4 @@ const iconsRegistry = {
 
 type IconsType = typeof iconsRegistry;
 
-type Iconsname = keyof IconsType;
+type IconsName = keyof IconsType;

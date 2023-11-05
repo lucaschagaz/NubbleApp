@@ -1,11 +1,13 @@
 import React from 'react';
 import {Svg, Path} from 'react-native-svg';
 import {IconBaseProps} from '../../components/Icon';
+import {useAppTheme} from '../../hook/useAppTheme';
 
 export const ChevronRightIcon = ({
   size = 20,
   color = 'grayBlack',
 }: IconBaseProps) => {
+  const {colors} = useAppTheme();
   return (
     <Svg width={size} height={size} viewBox="0 0 20 20" fill="none">
       <Path
