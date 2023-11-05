@@ -9,7 +9,7 @@ import {Box, BoxProps} from '../Box';
 import {$fontFamily, $fontSizes, Text} from '../Text';
 import {useAppTheme} from '../../hook/useAppTheme';
 
-interface ITextInputProps extends TextInputProps {
+export interface ITextInputProps extends TextInputProps {
   label: string;
   errorMessage?: string;
   rightComponent?: React.ReactElement;
@@ -43,7 +43,7 @@ export const TextInput = ({
   return (
     <Box {...boxProps}>
       <Pressable onPress={handleFocus}>
-        <Text mb="s4" preset="paragraphMedium">
+        <Text mb="s4" preset="paragraphMedium" semiBold>
           {label}
         </Text>
         <Box {...$BoxStyle}>
