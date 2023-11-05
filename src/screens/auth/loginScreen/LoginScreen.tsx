@@ -1,36 +1,43 @@
 import React from 'react';
+import {Screen} from '../../../components/Screen/screen';
 import {Text} from '../../../components/Text';
 import {TextInput} from '../../../components/TextInput';
 import {Button} from '../../../components/Button';
-import {Screen} from '../../../components/Screen/screen';
-import {Icon} from '../../../components/Icon';
+import {rootParamsList} from '../../../routes/routes';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {PasswordTextInput} from '../../../components/PasswordTextInput/PasswordTextInput';
 
-export const LoginScreen = () => {
+type loginScreenParams = NativeStackScreenProps<rootParamsList, 'LoginScreen'>;
+
+export const LoginScreen = ({navigation}: loginScreenParams) => {
+  const navigationToSignUpScreen = () => {
+    navigation.navigate('SingUpScreen');
+  };
+
   return (
     <Screen>
       <Text preset="headingLarge" mb="s10">
-        Olá!
+        Olá
       </Text>
-      <Text mb="s40" preset="paragraphLarge">
+      <Text preset="paragraphLarge" mb="s40">
         Digite seu e-mail e senha para entrar
       </Text>
       <TextInput
-        errorMessage="Mensagem de erro"
+        boxProps={{mb: 's16'}}
         label="E-mail"
         placeholder="Digite seu e-mail"
-        boxProps={{mb: 's20'}}
       />
-      <TextInput
-        label="Senha"
-        placeholder="Digite sua senha"
-        rightComponent={<Icon name="eyeOn" />}
-        boxProps={{mb: 's10'}}
-      />
-      <Text mb="s48" preset="paragraphSmall" bold color="primary">
+      <PasswordTextInput label="Senha" placeholder="Digite sua senha" />
+      <Text bold mt="s8" color="primary">
         Esqueci minha senha
       </Text>
-      <Button mb="s12" title="Entrar" />
-      <Button title="Criar uma conta" variant="outline" />
+      <Button mt="s48" title="Entrar" />
+      <Button
+        onPress={navigationToSignUpScreen}
+        mt="s12"
+        title="Criar uma conta"
+        variant="outline"
+      />
     </Screen>
   );
 };
