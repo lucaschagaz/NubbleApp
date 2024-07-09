@@ -4,14 +4,11 @@ import {IconBaseProps} from '../../components/Icon';
 import {useAppTheme} from '../../hook/useAppTheme';
 import {Circle} from 'react-native-svg';
 
-export const CheckRoundIcon = ({
-  size = 48,
-  color = 'success',
-}: IconBaseProps) => {
+export const CheckRoundIcon = ({size = 48}: IconBaseProps) => {
   const {colors} = useAppTheme();
   return (
     <Svg width={size} height={size} viewBox="0 0 48 48" fill="none">
-      <Circle cx="24" cy="24" r="24" fill={colors[color]} />
+      <Circle cx="24" cy="24" r="24" fill={colors.success} />
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
